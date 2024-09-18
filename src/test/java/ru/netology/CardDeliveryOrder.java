@@ -1,8 +1,6 @@
 package ru.netology;
 
 import com.codeborne.selenide.Configuration;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
@@ -11,30 +9,30 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 public class CardDeliveryOrder {
 
-   private String date = LocalDate.now().plusDays(4).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+
+//    String date = LocalDate.now().plusDays(4).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+
+    public String generateDate(Integer addDays, String pattern) {
+        return LocalDate.now().plusDays(addDays).format(DateTimeFormatter.ofPattern(pattern));
+    }
 
     @BeforeEach
-    void setUp() {
+    public void setUp () {
         Configuration.browser = "chrome";
-        Configuration.startMaximized = true;
         open("http://localhost:9999/");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
     }
 
-    @BeforeAll
-    static void setUpAll() {
-        WebDriverManager.chromedriver().setup();
-
-    }
-
-
     @Test
-    void shouldTestThePopup() {
+    void shouldTestThePopup () {
+        String date = generateDate(4, "dd.MM.yyyy");
+
         $("[data-test-id='city'] input").setValue("Краснодар");
         $("[data-test-id='date'] input").setValue(date);
         $("[data-test-id='name'] input").setValue("Назаркин Иван");
@@ -45,8 +43,10 @@ public class CardDeliveryOrder {
 
     }
 
-        @Test
-    void shouldTestTheCityField() {
+    @Test
+    void shouldTestTheCityField () {
+        String date = generateDate(4, "dd.MM.yyyy");
+
         $("[data-test-id='date'] input").setValue("date");
         $("[data-test-id='name'] input").setValue("Иванова Олеся");
         $("[data-test-id='phone'] input").setValue("+79978182345");
@@ -56,9 +56,9 @@ public class CardDeliveryOrder {
     }
 
     @Test
-    void ShouldCheckTheCorrectDate() {
+    void ShouldCheckTheCorrectDate () {
         $("[data-test-id='city'] input").setValue("Чебоксары");
-        $("[data-test-id='date'] input").setValue(date);
+        $("[data-test-id='date'] input").setValue("36.02.1995");
         $("[data-test-id='name'] input").setValue("Иванова Олеся");
         $("[data-test-id='phone'] input").setValue("+79978182345");
         $("[data-test-id='agreement']").click();
@@ -67,7 +67,9 @@ public class CardDeliveryOrder {
     }
 
     @Test
-    void shouldTestTheTelephoneField() {
+    void shouldTestTheTelephoneField () {
+        String date = generateDate(4, "dd.MM.yyyy");
+
         $("[data-test-id='city'] input").setValue("Майкоп");
         $("[data-test-id='date'] input").setValue(date);
         $("[data-test-id='name'] input").setValue("Каваркин Василий");
@@ -77,19 +79,22 @@ public class CardDeliveryOrder {
     }
 
     @Test
-    void shouldTestTheDateField() {
+    void shouldTestTheDateField () {
+        String date = generateDate(4, "dd.MM.yyyy");
+
         $("[data-test-id='city'] input").setValue("Пермь");
         $("[data-test-id='name'] input").setValue("Иванова Олеся");
         $("[data-test-id='phone'] input").setValue("+79978182345");
         $("[data-test-id='agreement']").click();
         $$("button").find(exactText("Забронировать")).click();
-        $(".input_invalid .input__sub").shouldHave(text("Поле обязательно для заполнения"));
-
+        $(".input_invalid .input__sub").shouldHave(text("Неверно введена дата"));
 
     }
 
     @Test
-    void shouldTestTheConsentCheckbox() {
+    void shouldTestTheConsentCheckbox () {
+        String date = generateDate(4, "dd.MM.yyyy");
+
         $("[data-test-id='city'] input").setValue("Уфа");
         $("[data-test-id='date'] input").setValue(date);
         $("[data-test-id='name'] input").setValue("Александров Алексей");
@@ -97,9 +102,4 @@ public class CardDeliveryOrder {
         $$("button").find(exactText("Забронировать")).click();
         $(".input_invalid .checkbox__text").shouldHave(text("Я соглашаюсь с условиями обработки и использования моих персональных данных"));
     }
-
-
-    }
-
-
-   
+}
