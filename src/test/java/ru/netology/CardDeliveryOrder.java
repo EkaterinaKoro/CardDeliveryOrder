@@ -31,7 +31,7 @@ public class CardDeliveryOrder {
     }
 
     @Test
-    void ShouldTestThePopup () {
+    void shouldTestThePopup () {
         String date = generateDate(4, "dd.MM.yyyy");
 
         $("[data-test-id='city'] input").setValue("Краснодар");
