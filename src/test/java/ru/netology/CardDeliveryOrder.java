@@ -25,6 +25,7 @@ public class CardDeliveryOrder {
     @BeforeEach
     public void setUp () {
         Configuration.browser = "chrome";
+        Configuration.browserSize = String.valueOf(true);
         open("http://localhost:9999/");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
     }
@@ -56,7 +57,7 @@ public class CardDeliveryOrder {
     }
 
     @Test
-    void ShouldCheckTheCorrectDate () {
+    void shouldCheckTheCorrectDate () {
         $("[data-test-id='city'] input").setValue("Чебоксары");
         $("[data-test-id='date'] input").setValue("36.02.1995");
         $("[data-test-id='name'] input").setValue("Иванова Олеся");
