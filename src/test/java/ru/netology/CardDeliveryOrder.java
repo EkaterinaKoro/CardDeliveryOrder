@@ -4,6 +4,7 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -45,7 +46,7 @@ public class CardDeliveryOrder {
     }
 
     @Test
-    void ShouldTestTheCityField () {
+    void shouldTestTheCityField () {
         String date = generateDate(4, "dd.MM.yyyy");
 
         $("[data-test-id='date'] input").setValue("date");
