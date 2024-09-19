@@ -1,14 +1,9 @@
 package ru.netology;
 
 import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -21,14 +16,12 @@ import static com.codeborne.selenide.Selenide.*;
 public class CardDeliveryOrder {
 
 
-//    String date = LocalDate.now().plusDays(4).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-
     public String generateDate(Integer addDays, String pattern) {
         return LocalDate.now().plusDays(addDays).format(DateTimeFormatter.ofPattern(pattern));
     }
 
     @BeforeEach
-    public void setUp () {
+    public void setUp() {
         Configuration.browser = "chrome";
         Configuration.browserSize = String.valueOf(true);
         open("http://localhost:9999/");
@@ -36,7 +29,7 @@ public class CardDeliveryOrder {
     }
 
     @Test
-    void shouldTestThePopup () {
+    void shouldTestThePopup() {
         String date = generateDate(4, "dd.MM.yyyy");
         $("[data-test-id='city'] input").setValue("Краснодар");
         $("[data-test-id='date'] input").setValue(date);
@@ -49,7 +42,7 @@ public class CardDeliveryOrder {
     }
 
     @Test
-    void shouldTestTheCityField () {
+    void shouldTestTheCityField() {
         String date = generateDate(4, "dd.MM.yyyy");
 
         $("[data-test-id='date'] input").setValue("date");
@@ -61,7 +54,7 @@ public class CardDeliveryOrder {
     }
 
     @Test
-    void shouldCheckTheCorrectDate () {
+    void shouldCheckTheCorrectDate() {
         $("[data-test-id='city'] input").setValue("Чебоксары");
         $("[data-test-id='date'] input").setValue("36.02.1995");
         $("[data-test-id='name'] input").setValue("Иванова Олеся");
@@ -72,7 +65,7 @@ public class CardDeliveryOrder {
     }
 
     @Test
-    void shouldTestTheTelephoneField () {
+    void shouldTestTheTelephoneField() {
         String date = generateDate(4, "dd.MM.yyyy");
 
         $("[data-test-id='city'] input").setValue("Майкоп");
@@ -84,7 +77,7 @@ public class CardDeliveryOrder {
     }
 
     @Test
-    void shouldTestTheDateField () {
+    void shouldTestTheDateField() {
         String date = generateDate(4, "dd.MM.yyyy");
 
         $("[data-test-id='city'] input").setValue("Пермь");
@@ -97,7 +90,7 @@ public class CardDeliveryOrder {
     }
 
     @Test
-    void shouldTestTheConsentCheckbox () {
+    void shouldTestTheConsentCheckbox() {
         String date = generateDate(4, "dd.MM.yyyy");
 
         $("[data-test-id='city'] input").setValue("Уфа");
