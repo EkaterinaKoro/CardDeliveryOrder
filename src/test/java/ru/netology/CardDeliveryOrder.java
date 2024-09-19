@@ -23,7 +23,6 @@ public class CardDeliveryOrder {
     @BeforeEach
     public void setUp() {
         Configuration.browser = "chrome";
-        Configuration.browserSize = String.valueOf(true);
         open("http://localhost:9999/");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
     }
