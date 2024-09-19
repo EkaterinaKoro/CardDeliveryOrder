@@ -1,9 +1,13 @@
 package ru.netology;
 
 import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
@@ -34,7 +38,6 @@ public class CardDeliveryOrder {
     @Test
     void shouldTestThePopup () {
         String date = generateDate(4, "dd.MM.yyyy");
-
         $("[data-test-id='city'] input").setValue("Краснодар");
         $("[data-test-id='date'] input").setValue(date);
         $("[data-test-id='name'] input").setValue("Назаркин Иван");
