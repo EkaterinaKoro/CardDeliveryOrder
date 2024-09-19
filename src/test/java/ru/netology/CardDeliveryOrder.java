@@ -45,7 +45,7 @@ public class CardDeliveryOrder {
     }
 
     @Test
-    void shouldTestTheCityField () {
+    void ShouldTestTheCityField () {
         String date = generateDate(4, "dd.MM.yyyy");
 
         $("[data-test-id='date'] input").setValue("date");
